@@ -2,11 +2,6 @@
 
 A modular Flask application that integrates with Cohere's language models to provide text generation and summarization capabilities.
 
-## Submission Information
-
-- **Date:** 2025-08-05
-- **User:** zshafique25
-
 ## Features
 
 - Text generation with configurable parameters (length, temperature)
@@ -29,7 +24,7 @@ This application is deployed and accessible at: [https://llm-flask-app.vercel.ap
 
 ## Screenshot
 
-![Application Screenshot](screenshot.png)
+![Application Screenshot](https://github.com/Zain-Shafique/llm-flask-app/tree/main/Screenshots)
 
 ## Sample Request/Response
 
