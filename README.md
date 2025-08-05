@@ -24,7 +24,7 @@ This application is deployed and accessible at: [https://llm-flask-app.vercel.ap
 
 ## Screenshot
 
-![Application Screenshot](https://github.com/Zain-Shafique/llm-flask-app/tree/main/Screenshots)
+[Application Screenshot Link](https://github.com/Zain-Shafique/llm-flask-app/tree/main/Screenshots)
 
 ## Sample Request/Response
 
