@@ -1,7 +1,12 @@
+from flask import Flask, request, jsonify, render_template, send_from_directory
 import os
-from flask import Flask, request, jsonify, render_template
-from dotenv import load_dotenv
+import sys
+
+# Add the root directory to the Python path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from llm_wrapper import LLMWrapper
+from dotenv import load_dotenv
 import logging
 
 # Configure logging
@@ -12,21 +17,21 @@ logger = logging.getLogger(__name__)
 load_dotenv()
 
 # Initialize Flask app
-app = Flask(__name__)
+app = Flask(__name__, 
+            template_folder='../templates',
+            static_folder='../static')
 
 # Initialize LLM wrapper with Cohere's model
-# Try to get API key from environment variable
 cohere_api_key = os.getenv("COHERE_API_KEY")
 if not cohere_api_key:
     logger.warning("COHERE_API_KEY not found in environment variables")
 
 try:
-    # Use "command" instead of "command-light" since the latter is deprecated
     llm = LLMWrapper(model_name="command", api_key=cohere_api_key)
     logger.info("LLM wrapper initialized successfully")
 except Exception as e:
     logger.error(f"Failed to initialize LLM wrapper: {str(e)}")
-    llm = None  # We'll handle this in the routes
+    llm = None
 
 @app.route('/')
 def home():
@@ -129,6 +134,9 @@ def status():
         'model': llm.model_name if llm else 'not_initialized'
     })
 
+# This is for local development
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
+
+# For Vercel serverless function
+app_handler = app
